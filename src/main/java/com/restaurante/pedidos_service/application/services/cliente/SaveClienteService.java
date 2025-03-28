@@ -1,6 +1,7 @@
 package com.restaurante.pedidos_service.application.services.cliente;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.restaurante.pedidos_service.application.usecase.cliente.SaveClienteUseCase;
 import com.restaurante.pedidos_service.domain.entities.Cliente;
@@ -29,6 +30,7 @@ public class SaveClienteService implements SaveClienteUseCase {
 	 * @return El cliente guardado.
 	 */
 	@Override
+	@Transactional
 	public Cliente save(Cliente cliente) {
 		return clienteRepositoryPort.save(cliente);
 	}

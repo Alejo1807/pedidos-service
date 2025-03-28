@@ -2,6 +2,7 @@ package com.restaurante.pedidos_service.domain.valueobjects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Clase que represente los totales y subtotales a ser facturados en el pedido
@@ -10,6 +11,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class TotalPedido {
 
 	//subtotal (valor antes de IVA)

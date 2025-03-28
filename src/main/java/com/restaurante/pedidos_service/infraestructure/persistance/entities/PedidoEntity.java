@@ -8,6 +8,7 @@ import com.restaurante.pedidos_service.infraestructure.persistance.embeddables.T
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -39,6 +40,7 @@ public class PedidoEntity {
 	//Identificador único de la entidad
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID_PEDIDO")
 	private Long idPedido;
 
 	//Relación de pedido con el cliente que hace el pedido
@@ -47,7 +49,7 @@ public class PedidoEntity {
 	private ClienteEntity cliente;
 
 	//Relación del pedido con los items que contiene
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<ItemPedidoEntity> itemsPedidos; 
 
@@ -73,6 +75,7 @@ public class PedidoEntity {
 
 	//Estado que representa si el cliente está Activo (True) o Inactivo (False)
 	@Builder.Default
+	@Column(name="ESTADO")
 	private Boolean estado = true;
 
 }

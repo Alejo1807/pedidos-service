@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.restaurante.pedidos_service.domain.entities.Pedido;
 import com.restaurante.pedidos_service.domain.ports.PedidoRepositoryPort;
+import com.restaurante.pedidos_service.infraestructure.persistance.entities.ItemPedidoEntity;
 import com.restaurante.pedidos_service.infraestructure.persistance.entities.PedidoEntity;
 import com.restaurante.pedidos_service.infraestructure.persistance.mappers.PedidoMapper;
 import com.restaurante.pedidos_service.infraestructure.persistance.repositories.PedidoRepositoryJPA;
@@ -23,14 +25,20 @@ public class PedidoRepositoryAdapter implements PedidoRepositoryPort {
 	PedidoRepositoryJPA pedidoRepositoryJPA; 
 
 	@Override
+	@Transactional
 	public Pedido save(Pedido pedido) {
 
 		PedidoEntity pedidoEntity = PedidoMapper.fromPedidoToPedidoEntity(pedido);
+		
+		for(ItemPedidoEntity itemPedidoEntity: pedidoEntity.getItemsPedidos()) {
+			itemPedidoEntity.setPedido(pedidoEntity);
+		}
 
 		return PedidoMapper.fromPedidoEntityToPedido(pedidoRepositoryJPA.save(pedidoEntity));
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Optional<Pedido> findById(Long idPedido) {
 
 		Optional<PedidoEntity> pedidoEntityOptional = pedidoRepositoryJPA.findById(idPedido);
@@ -44,6 +52,7 @@ public class PedidoRepositoryAdapter implements PedidoRepositoryPort {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Pedido> findAll() {
 		return pedidoRepositoryJPA.findAll().stream()
 				.map(PedidoMapper::fromPedidoEntityToPedido)
@@ -51,18 +60,19 @@ public class PedidoRepositoryAdapter implements PedidoRepositoryPort {
 	}
 
 	@Override
+	@Transactional
 	public Optional<Pedido> upDate(Pedido pedido) {
 		Optional<PedidoEntity> pedidoEntityOptional = pedidoRepositoryJPA.findById(pedido.getIdPedido());
 
-	    if (pedidoEntityOptional.isPresent()) {
-	    	PedidoEntity pedidoEntity = PedidoMapper.fromPedidoToPedidoEntity(pedido);
+		if (pedidoEntityOptional.isPresent()) {
+			PedidoEntity pedidoEntity = PedidoMapper.fromPedidoToPedidoEntity(pedido);
 
-	        PedidoEntity updatedPedidoEntity = pedidoRepositoryJPA.save(pedidoEntity);
-	        Pedido updatedPedido = PedidoMapper.fromPedidoEntityToPedido(updatedPedidoEntity);
-	        return Optional.of(updatedPedido);
-	    } else {
-	        return Optional.empty();
-	    }
+			PedidoEntity updatedPedidoEntity = pedidoRepositoryJPA.save(pedidoEntity);
+			Pedido updatedPedido = PedidoMapper.fromPedidoEntityToPedido(updatedPedidoEntity);
+			return Optional.of(updatedPedido);
+		} else {
+			return Optional.empty();
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.restaurante.pedidos_service.application.usecase.cliente.FindClienteUseCase;
 import com.restaurante.pedidos_service.domain.entities.Cliente;
@@ -31,6 +32,7 @@ public class FindClienteService implements FindClienteUseCase {
 	 * @param idCliente ID del cliente a buscar.
 	 * @return Un Optional que contiene el cliente si se encuentra, o vacío si no.
 	 */
+	@Transactional(readOnly=true)
 	@Override
 	public Optional<Cliente> findById(Long idCliente) {
 		return clienteRepositoryPort.findById(idCliente);
@@ -41,6 +43,7 @@ public class FindClienteService implements FindClienteUseCase {
 	 *
 	 * @return Una lista de todos los clientes.
 	 */
+	@Transactional(readOnly=true)
 	@Override
 	public List<Cliente> findAll() {
 		return clienteRepositoryPort.findAll();

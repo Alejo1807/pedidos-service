@@ -2,6 +2,7 @@ package com.restaurante.pedidos_service.domain.valueobjects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Objeto de valor que relaciona una dirección de entrega del pedidio solicitado
@@ -10,6 +11,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class DireccionEntrega {
 
 	//Departamento de colombia

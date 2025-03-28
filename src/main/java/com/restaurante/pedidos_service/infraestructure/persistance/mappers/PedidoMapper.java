@@ -20,6 +20,7 @@ public class PedidoMapper {
 	}
 
 	public static Pedido fromPedidoEntityToPedido(PedidoEntity pedidoEntity) {
+				
 		return new Pedido(
 				pedidoEntity.getIdPedido(),
 				ClienteMapper.fromClienteEntityToCliente(pedidoEntity.getCliente()),

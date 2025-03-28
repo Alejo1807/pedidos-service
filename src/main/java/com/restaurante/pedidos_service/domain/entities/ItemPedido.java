@@ -2,6 +2,7 @@ package com.restaurante.pedidos_service.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -10,6 +11,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ItemPedido {
 
 	//Identificador único del item del pedido
