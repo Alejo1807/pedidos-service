@@ -1,16 +1,13 @@
-package com.restaurante.pedidos_service.domain.valueobjects;
+package com.restaurante.pedidos_service.infraestructure.persistance.embeddables;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-/**
- * Clase que represente los totales y subtotales a ser facturados en el pedido
- * @author Usuario
- *
- */
 @Data
+@Embeddable
 @AllArgsConstructor
-public class TotalPedido {
+public class TotalPedidoEmbeddable {
 
 	//subtotal (valor antes de IVA)
 	private Double subTotal;

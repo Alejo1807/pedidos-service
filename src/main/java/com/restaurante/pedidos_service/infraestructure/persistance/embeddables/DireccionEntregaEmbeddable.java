@@ -1,16 +1,13 @@
-package com.restaurante.pedidos_service.domain.valueobjects;
+package com.restaurante.pedidos_service.infraestructure.persistance.embeddables;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-/**
- * Objeto de valor que relaciona una dirección de entrega del pedidio solicitado
- * @author Usuario
- *
- */
 @Data
+@Embeddable
 @AllArgsConstructor
-public class DireccionEntrega {
+public class DireccionEntregaEmbeddable {
 
 	//Departamento de colombia
 	private String departamento;
@@ -23,4 +20,5 @@ public class DireccionEntrega {
 
 	//Dirección (nomenclatura) de entrega
 	private String direccion;
+
 }

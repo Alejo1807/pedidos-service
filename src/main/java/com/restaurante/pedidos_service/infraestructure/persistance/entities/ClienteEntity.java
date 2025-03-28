@@ -1,20 +1,26 @@
-package com.restaurante.pedidos_service.domain.entities;
+package com.restaurante.pedidos_service.infraestructure.persistance.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
-/**
- * Clase que representa la entidad Cliente del negocio
- * 
- *
- */
 @Data
+@Entity
+@Builder
 @AllArgsConstructor
-public class Cliente {
+@Table(name="CLIENTES")
+public class ClienteEntity {
 
 	//Identificador único del cliente
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idCliente;
 
 	//Nombre del cliente
@@ -28,8 +34,9 @@ public class Cliente {
 	@NotEmpty
 	//e-mail del cliente
 	private String email;
-	
+
 	//Estado que representa si el cliente está Activo (True) o Inactivo (False)
-	private Boolean estado;
+	@Builder.Default
+	private Boolean estado = true;
 
 }
