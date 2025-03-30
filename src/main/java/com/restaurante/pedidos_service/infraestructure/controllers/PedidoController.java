@@ -46,15 +46,14 @@ public class PedidoController {
 		}
 	}
 
-	@PostMapping("")
-	public Pedido save(@RequestBody Pedido pedido) {
-		return savePedido.save(pedido);
+	@PostMapping
+	public ResponseEntity<Pedido> save(@RequestBody Pedido pedido) {
+		return ResponseEntity.ok(savePedido.save(pedido));
 	}
 
-	@PutMapping("/")
-	public Pedido update(@RequestBody Pedido pedido) {
-		return updatePedidoUseCase.update(pedido).get();
+	@PutMapping
+	public ResponseEntity<Pedido> update(@RequestBody Pedido pedido) {
+		return ResponseEntity.ok(updatePedidoUseCase.update(pedido).get());
 	}
-
 
 }
