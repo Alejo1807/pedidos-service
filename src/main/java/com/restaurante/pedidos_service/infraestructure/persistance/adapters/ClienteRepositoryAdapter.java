@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.restaurante.pedidos_service.application.ports.ClienteRepositoryPort;
 import com.restaurante.pedidos_service.domain.entities.Cliente;
-import com.restaurante.pedidos_service.domain.ports.ClienteRepositoryPort;
 import com.restaurante.pedidos_service.infraestructure.persistance.entities.ClienteEntity;
 import com.restaurante.pedidos_service.infraestructure.persistance.mappers.ClienteMapper;
 import com.restaurante.pedidos_service.infraestructure.persistance.repositories.ClienteRepositoryJPA;

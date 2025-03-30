@@ -3,9 +3,9 @@ package com.restaurante.pedidos_service.application.services.cliente;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.restaurante.pedidos_service.application.ports.ClienteRepositoryPort;
 import com.restaurante.pedidos_service.application.usecase.cliente.SaveClienteUseCase;
 import com.restaurante.pedidos_service.domain.entities.Cliente;
-import com.restaurante.pedidos_service.domain.ports.ClienteRepositoryPort;
 
 import lombok.RequiredArgsConstructor;
 

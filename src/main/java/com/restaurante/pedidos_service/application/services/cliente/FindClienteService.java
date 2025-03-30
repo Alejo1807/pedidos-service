@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.restaurante.pedidos_service.application.ports.ClienteRepositoryPort;
 import com.restaurante.pedidos_service.application.usecase.cliente.FindClienteUseCase;
 import com.restaurante.pedidos_service.domain.entities.Cliente;
-import com.restaurante.pedidos_service.domain.ports.ClienteRepositoryPort;
 
 import lombok.RequiredArgsConstructor;
 

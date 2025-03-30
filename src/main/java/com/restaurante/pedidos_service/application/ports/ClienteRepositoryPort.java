@@ -1,4 +1,4 @@
-package com.restaurante.pedidos_service.domain.ports;
+package com.restaurante.pedidos_service.application.ports;
 
 import java.util.List;
 import java.util.Optional;

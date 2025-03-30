@@ -2,9 +2,9 @@ package com.restaurante.pedidos_service.application.services.pedido;
 
 import org.springframework.stereotype.Component;
 
+import com.restaurante.pedidos_service.application.ports.PedidoRepositoryPort;
 import com.restaurante.pedidos_service.application.usecase.pedido.SavePedidoUseCase;
 import com.restaurante.pedidos_service.domain.entities.Pedido;
-import com.restaurante.pedidos_service.domain.ports.PedidoRepositoryPort;
 
 import lombok.RequiredArgsConstructor;
 
