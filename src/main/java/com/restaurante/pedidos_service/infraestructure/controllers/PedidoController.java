@@ -21,40 +21,40 @@ import com.restaurante.pedidos_service.domain.entities.Pedido;
 @RestController
 @RequestMapping("api/pedidos")
 public class PedidoController {
-	
+
 	@Autowired
 	SavePedidoUseCase savePedido;
-	
+
 	@Autowired
 	FindPedidoUseCase findPedidoUseCase;
-	
+
 	@Autowired
 	UpdatePedidoUseCase updatePedidoUseCase; 
-	
+
 	@GetMapping("/list-all")
 	public List<Pedido> findAll(){
 		return findPedidoUseCase.findAll();
 	}
-	
+
 	@GetMapping("/{idPedido}")
 	public ResponseEntity<Pedido> findById(@PathVariable("idPedido") Long idPedido) {
-	    Optional<Pedido> pedidoOptional = findPedidoUseCase.findById(idPedido);
-	    if (pedidoOptional.isPresent()) {
-	        return ResponseEntity.ok(pedidoOptional.get());
-	    } else {
-	        return ResponseEntity.notFound().build();
-	    }
+		Optional<Pedido> pedidoOptional = findPedidoUseCase.findById(idPedido);
+		if (pedidoOptional.isPresent()) {
+			return ResponseEntity.ok(pedidoOptional.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
-	
+
 	@PostMapping("")
 	public Pedido save(@RequestBody Pedido pedido) {
 		return savePedido.save(pedido);
 	}
-	
+
 	@PutMapping("/")
 	public Pedido update(@RequestBody Pedido pedido) {
 		return updatePedidoUseCase.update(pedido).get();
 	}
-	
-	
+
+
 }
