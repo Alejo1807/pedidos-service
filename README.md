@@ -41,6 +41,12 @@ El microservicio se ejecutará en `http://localhost:8081`.
 | POST    | /api/clientes       | Guarda un nuevo cliente        |
 | PUT     | /api/clientes       | Actualiza un cliente existente |
 
+## Diagrama de Arquitectura
+Este diagrama muestra la arquitectura del microservicio de pedidos, incluyendo los componentes principales y sus interacciones.
+
+![alt text](<Pedidos-Service.drawio (1).png>)
+
+
 ## 🛠 Tecnologías Utilizadas
 
 - Java con Spring Boot
