@@ -9,20 +9,20 @@ import lombok.NoArgsConstructor;
  * @author Usuario
  *
  */
-	@Data
-	@AllArgsConstructor
-	@NoArgsConstructor
-	public class TotalPedido {
-	
-		//subtotal (valor antes de IVA)
-		private Double subTotal;
-	
-		//Porcentaje de IVA a aplicar
-		private Short porcentajeIVA;
-	
-		//Valor del IVA del pedido (porcentajeIVA * subTotal)
-		private Double iva;
-	
-		//Valor Total a cobrar al cliente por el pedido
-		private Double totalPedido;
-	}
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TotalPedido {
+
+	//subtotal (valor antes de IVA)
+	private Double subTotal;
+
+	//Porcentaje de IVA a aplicar
+	private Short porcentajeIVA;
+
+	//Valor del IVA del pedido (porcentajeIVA * subTotal)
+	private Double iva;
+
+	//Valor Total a cobrar al cliente por el pedido
+	private Double totalPedido;
+}
