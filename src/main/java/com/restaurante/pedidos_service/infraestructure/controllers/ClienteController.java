@@ -3,6 +3,7 @@ package com.restaurante.pedidos_service.infraestructure.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,20 +32,34 @@ public class ClienteController {
 	@GetMapping("/{idCliente}")
 	@Operation(summary = "Buscar cliente por ID", description = "Obtiene los detalles de un cliente a partir de su ID")
 	public ResponseEntity<Cliente> findById(@PathVariable("idCliente") Long idCliente) {
-		Optional<Cliente> clienteOptional = findClienteUseCase.findById(idCliente);
-		return clienteOptional.map(ResponseEntity::ok)
-				.orElseGet(() -> ResponseEntity.notFound().build());
+		try {
+			Optional<Cliente> clienteOptional = findClienteUseCase.findById(idCliente);
+			return clienteOptional.map(ResponseEntity::ok)
+					.orElseGet(() -> ResponseEntity.notFound().build());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 
 	@PostMapping
 	@Operation(summary = "Guardar un nuevo cliente", description = "Registra un nuevo cliente en la base de datos")
 	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
-		return ResponseEntity.ok(saveClienteUseCase.save(cliente));
+		try {
+			return ResponseEntity.ok(saveClienteUseCase.save(cliente));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 
 	@PutMapping
 	@Operation(summary = "Actualizar cliente", description = "Modifica los datos de un cliente existente")
 	public ResponseEntity<Cliente> update(@RequestBody Cliente cliente) {
-		return ResponseEntity.ok(updateClienteUseCase.update(cliente).get());
+		try {
+			Optional<Cliente> updatedCliente = updateClienteUseCase.update(cliente);
+			return updatedCliente.map(ResponseEntity::ok)
+					.orElseGet(() -> ResponseEntity.notFound().build());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 }
