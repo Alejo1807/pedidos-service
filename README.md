@@ -5,7 +5,7 @@ Este es el microservicio de Pedidos del sistema de gestión de pedidos de un res
 ## 🚀 Requisitos Previos
 Antes de ejecutar el microservicio, asegúrate de tener instalado lo siguiente:
 
-- Java (Versión recomendada: 17+)
+- Java (Versión recomendada: 21+)
 - Git (Opcional, para clonar el repositorio)
 
 ## 📂 Configuración del Proyecto
@@ -46,6 +46,16 @@ Este diagrama muestra la arquitectura del microservicio de pedidos, incluyendo l
 
 ![alt text](<Pedidos-Service.drawio (1).png>)
 
+## Variables de entorno
+Configura las siguientes variables de entorno.
+```env
+DB_USER_POSTGRES=tu_usuario_postgres
+DB_PASSWORD_POSTGRES=tu_password_postgres
+RABBITMQ_SP_HOST=localhost
+RABBITMQ_SP_PORT=5672
+RABBITMQ_SP_USER=guest
+RABBITMQ_SP_PASSWORD=guest
+```
 
 ## 🛠 Tecnologías Utilizadas
 
