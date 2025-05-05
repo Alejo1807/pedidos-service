@@ -22,14 +22,12 @@ public class PedidoListener {
 
 	@RabbitListener(queues = "DisponibilidadValidada")
 	public void handleAvailabilityResponse(Map<String, Object> response) {
-		Long pedidoId = (Long) response.get("pedidoId");
-		Boolean disponible = (Boolean) response.get("disponible");
+		Long pedidoId = (Long) response.get("idPedido");
+		Boolean disponible = (Boolean) response.get("availability");
 
 		if (disponible) {
 			// Si hay disponibilidad, guardar el pedido
-			Pedido pedido = pedidoRepositoryPort.findById(pedidoId).orElseThrow(() -> new IllegalStateException("Pedido no encontrado"));
-			pedidoRepositoryPort.save(pedido);
-			rabbitTemplate.convertAndSend("PedidoCreado", pedido);
+			System.out.println("[RabbitMQ] Mensaje recibido en DisponibilidadValidada: " + pedidoId);
 		} else {
 			// Manejar caso de no disponibilidad
 			throw new IllegalStateException("No hay suficiente inventario disponible para el producto.");

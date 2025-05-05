@@ -30,7 +30,7 @@ public class SavePedidoService implements SavePedidoUseCase {
 	public Pedido save(Pedido pedido) {
 
 		// Publicar mensaje para verificar disponibilidad
-		rabbitTemplate.convertAndSend("validateAvailabilityQueue", pedido);
+		rabbitTemplate.convertAndSend("PedidoCreado", pedido);
 		return pedido;
 
 
