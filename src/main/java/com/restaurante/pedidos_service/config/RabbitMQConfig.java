@@ -21,4 +21,5 @@ public class RabbitMQConfig {
     public Queue inventoryRefreshQueue() {
         return new Queue("InventarioActualizado", true); // Cola de respuesta
     }
+    
 }
