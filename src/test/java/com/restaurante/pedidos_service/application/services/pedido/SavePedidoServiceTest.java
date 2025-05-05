@@ -1,15 +1,18 @@
 package com.restaurante.pedidos_service.application.services.pedido;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.restaurante.pedidos_service.application.ports.PedidoRepositoryPort;
 import com.restaurante.pedidos_service.domain.entities.Pedido;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
 
 /**
  * Clase de prueba para el servicio SavePedidoService.
@@ -17,10 +20,13 @@ import com.restaurante.pedidos_service.domain.entities.Pedido;
 @SpringBootTest
 public class SavePedidoServiceTest {
 
-	@Mock
+	@MockBean
 	private PedidoRepositoryPort pedidoRepositoryPort;
 
-	@InjectMocks
+	@MockBean
+	private RabbitTemplate rabbitTemplate;
+
+	@Autowired
 	private SavePedidoService savePedidoService;
 
 	/**
@@ -35,5 +41,7 @@ public class SavePedidoServiceTest {
 		Pedido result = savePedidoService.save(pedido);
 
 		assertEquals(pedido, result);
+
+		verify(rabbitTemplate).convertAndSend("PedidoCreado", pedido);
 	}
 }
