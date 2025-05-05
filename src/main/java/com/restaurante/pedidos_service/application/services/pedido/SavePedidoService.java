@@ -3,6 +3,7 @@ package com.restaurante.pedidos_service.application.services.pedido;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
+import com.restaurante.pedidos_service.application.ports.PedidoRepositoryPort;
 import com.restaurante.pedidos_service.application.usecase.pedido.SavePedidoUseCase;
 import com.restaurante.pedidos_service.domain.entities.Pedido;
 
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class SavePedidoService implements SavePedidoUseCase {
 
 	private final RabbitTemplate rabbitTemplate;
+	private final PedidoRepositoryPort pedidoRepositoryPort;
 
 
 	/**
@@ -31,7 +33,8 @@ public class SavePedidoService implements SavePedidoUseCase {
 
 		// Publicar mensaje para verificar disponibilidad
 		rabbitTemplate.convertAndSend("PedidoCreado", pedido);
-		return pedido;
+		
+		return pedidoRepositoryPort.save(pedido);
 
 
 	}
