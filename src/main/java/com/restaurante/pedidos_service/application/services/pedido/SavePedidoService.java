@@ -8,6 +8,9 @@ import com.restaurante.pedidos_service.application.usecase.pedido.SavePedidoUseC
 import com.restaurante.pedidos_service.domain.entities.Pedido;
 
 import lombok.RequiredArgsConstructor;
+//import org.springframework.beans.factory.annotation.Autowired;
+ 
+ 
 
 /**
  * Servicio que implementa el caso de uso para guardar Pedidos
@@ -18,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class SavePedidoService implements SavePedidoUseCase {
 
-	private final RabbitTemplate rabbitTemplate;
 	private final PedidoRepositoryPort pedidoRepositoryPort;
+	private final RabbitTemplate rabbitTemplate;
 
 
 	/**
