@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 import com.restaurante.pedidos_service.application.usecase.pedido.FindPedidoUseCase;
 import com.restaurante.pedidos_service.application.usecase.pedido.SavePedidoUseCase;
@@ -17,6 +18,7 @@ import com.restaurante.pedidos_service.application.usecase.pedido.UpdatePedidoUs
 import com.restaurante.pedidos_service.domain.entities.Pedido;
 import com.restaurante.pedidos_service.infraestructure.excepcion.ResourceNotFoundException;
 
+@Slf4j
 @RestController
 @RequestMapping("api/pedidos")
 @Tag(name = "Pedidos", description = "Operaciones sobre los pedidos del restaurante")
@@ -38,6 +40,7 @@ public class PedidoController {
 		try {
 			return ResponseEntity.ok(findPedidoUseCase.findAll());
 		} catch (Exception e) {
+			log.error("Error al obtener todos los pedidos", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
@@ -50,8 +53,10 @@ public class PedidoController {
 			return pedidoOptional.map(ResponseEntity::ok)
 					.orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con ID: " + idPedido));
 		} catch (ResourceNotFoundException e) {
+			log.warn("Pedido no encontrado con ID: {}", idPedido);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} catch (Exception e) {
+			log.error("Error al buscar pedido por ID {}", idPedido, e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
@@ -62,6 +67,7 @@ public class PedidoController {
 		try {
 			return ResponseEntity.ok(savePedido.save(pedido));
 		} catch (Exception e) {
+			log.error("Error al crear pedido por ID {}", pedido, e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
@@ -74,8 +80,10 @@ public class PedidoController {
 			return updatedPedido.map(ResponseEntity::ok)
 					.orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con ID: " + pedido.getIdPedido()));
 		} catch (ResourceNotFoundException e) {
+			log.warn("No se pudo actualizar, pedido no encontrado con ID: {}", pedido.getIdPedido());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} catch (Exception e) {
+			log.error("Error al actualizar pedido por ID {}", pedido, e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}

@@ -1,5 +1,7 @@
 package com.restaurante.pedidos_service.infraestructure.persistance.entities;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -22,11 +24,16 @@ import lombok.NoArgsConstructor;
 @Table(name="ITEMS_PEDIDOS")
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemPedidoEntity {
+public class ItemPedidoEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//Identificador único del item del pedido
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idItemPedido;
 
 	//Identificar único de la receta que viene asociada al item,

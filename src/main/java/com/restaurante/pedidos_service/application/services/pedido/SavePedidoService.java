@@ -30,12 +30,13 @@ public class SavePedidoService implements SavePedidoUseCase {
 	 */
 	@Override
 	public Pedido save(Pedido pedido) {
+		
+		Pedido pedidoGuardado = pedidoRepositoryPort.save(pedido);
 
 		// Publicar mensaje para verificar disponibilidad
-		rabbitTemplate.convertAndSend("PedidoCreado", pedido);
+		rabbitTemplate.convertAndSend("pedido.exchange", "pedido.creado", pedidoGuardado);
 		
-		return pedidoRepositoryPort.save(pedido);
-
+		return pedidoGuardado;
 
 	}
 

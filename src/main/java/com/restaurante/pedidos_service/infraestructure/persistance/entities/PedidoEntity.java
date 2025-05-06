@@ -1,5 +1,6 @@
 package com.restaurante.pedidos_service.infraestructure.persistance.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -35,11 +36,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="pedidos")
-public class PedidoEntity {
+public class PedidoEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//Identificador único de la entidad
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_PEDIDO")
 	private Long idPedido;
 

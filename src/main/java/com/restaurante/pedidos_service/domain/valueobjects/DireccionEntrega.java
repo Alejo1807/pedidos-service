@@ -1,5 +1,7 @@
 package com.restaurante.pedidos_service.domain.valueobjects;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DireccionEntrega {
+public class DireccionEntrega implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//Departamento de colombia
 	private String departamento;

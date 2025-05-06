@@ -1,4 +1,4 @@
-package com.restaurante.pedidos_service.config;
+package com.restaurante.pedidos_service.infraestructure.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

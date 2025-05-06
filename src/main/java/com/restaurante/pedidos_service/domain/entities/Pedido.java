@@ -1,5 +1,6 @@
 package com.restaurante.pedidos_service.domain.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.restaurante.pedidos_service.domain.valueobjects.DireccionEntrega;
@@ -18,7 +19,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pedido {
+public class Pedido implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//Identificador único del Pedido
 	private Long idPedido;
