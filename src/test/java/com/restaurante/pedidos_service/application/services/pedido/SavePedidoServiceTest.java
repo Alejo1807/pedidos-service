@@ -2,46 +2,44 @@ package com.restaurante.pedidos_service.application.services.pedido;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import com.restaurante.pedidos_service.application.ports.PedidoRepositoryPort;
 import com.restaurante.pedidos_service.domain.entities.Pedido;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 
 /**
  * Clase de prueba para el servicio SavePedidoService.
  */
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class SavePedidoServiceTest {
 
-	@MockBean
+	@Mock
 	private PedidoRepositoryPort pedidoRepositoryPort;
 
-	@MockBean
+	@Mock
 	private RabbitTemplate rabbitTemplate;
 
-	@Autowired
+	@InjectMocks
 	private SavePedidoService savePedidoService;
 
-	/**
-	 * Prueba para verificar que el método save funciona correctamente.
-	 */
 	@Test
-	public void testSavePedido() {
+	void testSavePedido() {
 		Pedido pedido = new Pedido(1L, null, null, null, null, true);
 
-		Mockito.when(pedidoRepositoryPort.save(pedido)).thenReturn(pedido);
+		when(pedidoRepositoryPort.save(Mockito.any(Pedido.class))).thenReturn(pedido);
 
 		Pedido result = savePedidoService.save(pedido);
 
 		assertEquals(pedido, result);
-
-		verify(rabbitTemplate).convertAndSend("PedidoCreado", pedido);
+		verify(rabbitTemplate).convertAndSend("pedido.exchange", "pedido.creado", pedido);
 	}
 }
