@@ -17,10 +17,10 @@ public class InventarioListener {
 	
 	@RabbitListener(queues = "DisponibilidadValidada")
 	public void onAvailabilityMessage(AvailabilityResponseDTO response) {
-		System.out.println("✅ Inventario validado para el pedido: " + response.getIdPedido());
+		System.out.println("[RabbitMQ] Inventario validado para el pedido: " + response.getIdPedido());
 
 		validateAvailabilityUseCase.handleAvailabilityResponse(response);
-		System.out.println("📩 Mensaje recibido: " + response);
+		System.out.println("[RabbitMQ] Mensaje recibido: " + response);
 	}
 
 }
